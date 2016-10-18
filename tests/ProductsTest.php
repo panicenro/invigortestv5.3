@@ -69,12 +69,20 @@ class ProductsTest extends TestCase
     /** @test */
     public function update_product()
     {
-
+        $path = '/var/www/invigortest/public/uploads/bodyBG2.jpg';
+        $this->visit('products/1/edit')
+            ->type('Update Hello From Test 123456', 'product_name')
+            ->type(100, 'product_price')
+            ->type('Body from Testing update...', 'product_description')
+            ->attach($path, 'product_picture')
+            ->press('Save')
+            ->seePageIs('products');
     }
 
     /** @test */
     public function delete_product()
     {
-
+        $this->visit('products/destroy/1')            
+            ->seePageIs('products');
     }
 }
